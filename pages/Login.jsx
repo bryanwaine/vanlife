@@ -6,6 +6,7 @@ export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
     const [status, setStatus] = React.useState("idle")
     const [error, setError] = React.useState(null)
+    const isLoggedIn = localStorage.getItem("loggedin")
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -49,7 +50,7 @@ export default function Login() {
                     <h3 className="login-error">{error.message}</h3>
             }
 
-            <form onSubmit={handleSubmit} className="login-form">
+            {isLoggedIn ? <h3>You are already signed in</h3> : <form onSubmit={handleSubmit} className="login-form">
                 <input
                     name="email"
                     onChange={handleChange}
@@ -72,7 +73,7 @@ export default function Login() {
                         : "Log in"
                     }
                 </button>
-            </form>
+            </form>}
         </div>
     )
 
